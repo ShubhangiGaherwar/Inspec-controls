@@ -1,4 +1,4 @@
-name: MasterDeployCI
+name: Create Archive 
 on:
   push:
     branches:
