@@ -5,7 +5,6 @@ control "App checks" do                                # A unique ID for this co
   impact 1.0                                          # Just how critical is
   title "App instance reachability"
 
-
   ser.each do |ins|
 
         describe command("curl -kIH 'host: #{ins}' https://localhost 2>/dev/null  | egrep 'HTTP.*302|HTTP.*200'") do
@@ -14,4 +13,3 @@ control "App checks" do                                # A unique ID for this co
 
     end
   end
-
