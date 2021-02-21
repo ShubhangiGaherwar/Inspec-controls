@@ -1,16 +1,28 @@
 on:
-  push:
-    branches:
-      - master
-name: Create Release
+  push
+name: Create Release (backup action)
+
 jobs:
   build:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: 'custom_release.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig'
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with: 
+          file: "./coupa-app" 
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: shubha1
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
