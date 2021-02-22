@@ -43,7 +43,7 @@ jobs:
           prerelease: false
       - name : Printing create release output
         run:
-             echo " Create release outputs = ${{steps.create_release.outputs.*}}"
+             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
 
 
 
