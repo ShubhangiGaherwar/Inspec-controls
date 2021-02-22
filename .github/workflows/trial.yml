@@ -1,0 +1,14 @@
+name : Trial action
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Printing
+        run: |
+          echo "Hello World!!"
+
+          ls -alh
+          zip -r coupa-app.zip coupa-app
+          echo "Coupa-app dir zipped"
