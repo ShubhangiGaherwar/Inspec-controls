@@ -11,12 +11,20 @@ jobs:
 
           control_dirs= ls | grep coupa
           echo $control_dirs
-          zip -r coupa_app_release.zip coupa-app
-          zip -r coupa_db_release.zip coupa-db
-          echo "Coupa-app and db dir zipped"
+          for each_dir in $control_dirs
+          do
+            zip -r $each_dir.zip $each_dir
+          done
 
+
+      ## zip -r coupa_app_release.zip coupa-app
+      # zip -r coupa_db_release.zip coupa-db
+      # echo "Coupa-app and db dir zipped"
       #
-      #
+
+
+
+
       # - name: Create Release
       #   id: create_release
       #   uses: actions/create-release@v1
