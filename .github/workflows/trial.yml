@@ -1,0 +1,12 @@
+name : Trial action
+on:
+  push:
+    branches:
+      master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      -name:
+        run: |
+          echo "Hello World!!"
