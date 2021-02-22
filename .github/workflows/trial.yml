@@ -22,6 +22,9 @@ jobs:
         with:
           directory: './coupa-db'
           filename: 'coupa-db_release.zip'
+        run: |
+            ls 
+
       - name: Upload to release
         uses: JasonEtco/upload-to-release@master
         with:
