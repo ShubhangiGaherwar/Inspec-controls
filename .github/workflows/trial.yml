@@ -29,9 +29,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-
-          exclusions: '*.git* /*node_modules/* .editorconfig'
       # - name: Upload Release
       #   uses: ncipollo/release-action@v1
       #   with:
