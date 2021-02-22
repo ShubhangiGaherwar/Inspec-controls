@@ -11,6 +11,11 @@ jobs:
 
           control_dirs= ls | grep coupa
           echo $control_dirs
+          for value in {1..5}
+          do
+            echo $value
+          done
+
 
           for each_dir in $control_dirs
           do
