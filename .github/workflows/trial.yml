@@ -10,13 +10,13 @@ jobs:
           echo "Hello World!!"
 
           ls -alh
-          zip -r coupa-app.zip coupa-app
+          zip -r coupa_app_release.zip coupa-app
           echo "Coupa-app dir zipped"
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          directory: './coupa-app'
-          filename: 'coupa_app_release.zip'
+      # - name: Archive Release
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     directory: './coupa-app'
+      #     filename: 'coupa_app_release.zip'
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
@@ -25,17 +25,15 @@ jobs:
       - name : Printing
         run:
            ls -alh
-           
+
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: coupa_app_release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-#       - name: Upload to release
-#         uses: JasonEtco/upload-to-release@master
-#         with:
-#           args: coupa-db_release.zip
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-#
 #
 #
 #
