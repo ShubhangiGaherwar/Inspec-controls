@@ -8,5 +8,6 @@ jobs:
       - name: Printing
         run: |
           echo "Hello World!!"
+          cd coupa-app
           ls -alh
         
