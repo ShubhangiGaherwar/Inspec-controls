@@ -41,9 +41,9 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
-      - name : Printing
+      - name : Printing create release output
         run:
-             echo steps.create_release.outputs
+             echo " Create release outputs = ${{steps.create_release.outputs.*}}""
 
 
 
