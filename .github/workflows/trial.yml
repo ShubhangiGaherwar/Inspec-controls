@@ -54,9 +54,8 @@ jobs:
         with:
           release_id: ${{ steps.create_release.outputs.id }}
           assets_path:  coupa_app_release.zip
-      - name: Upload Release Assets
-        id: upload-release-assets
-        uses: dwenegar/upload-release-assets@v1
+
+      - uses: dwenegar/upload-release-assets@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
