@@ -16,11 +16,18 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           directory: './coupa-app'
-          filename: 'release.zip'
+          filename: 'coupa_app_release.zip'
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          directory: './coupa-db'
+          filename: 'coupa-db_release.zip'
+
+
 
           exclusions: '*.git* /*node_modules/* .editorconfig'
-      - name: Upload Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "release.zip"
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "release.zip"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
