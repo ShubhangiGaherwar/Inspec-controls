@@ -7,4 +7,5 @@ jobs:
       - name: Printing
         run: |
           echo "Hello World!!"
+          ls -alh
         
