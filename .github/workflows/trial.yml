@@ -13,19 +13,19 @@ jobs:
           zip -r coupa_app_release.zip coupa-app
           zip -r coupa_db_release.zip coupa-db
           echo "Coupa-app and db dir zipped"
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          directory: './coupa-app'
-          filename: 'coupa_app_release.zip'
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          directory: './coupa-db'
-          filename: 'coupa_db_release.zip'
-      - name : Printing
-        run:
-           ls -alh
+      # - name: Archive Release
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     directory: './coupa-app'
+      #     filename: 'coupa_app_release.zip'
+      # - name: Archive Release
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     directory: './coupa-db'
+      #     filename: 'coupa_db_release.zip'
+      # - name : Printing
+      #   run:
+      #      ls -alh
 
 
       - name: Create Release
@@ -53,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_id: ${{ steps.create_release.outputs.id }}
-          assets_path: coupa_app_release.zip , coupa_db_release.zip
+          assets_path:  coupa_db_release.zip
 
 
 
