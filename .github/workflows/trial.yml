@@ -12,3 +12,10 @@ jobs:
           ls -alh
           zip -r coupa-app.zip coupa-app
           echo "Coupa-app dir zipped"
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          directory: './coupa-app'
+          filename: 'release.zip'
+
+          exclusions: '*.git* /*node_modules/* .editorconfig'
