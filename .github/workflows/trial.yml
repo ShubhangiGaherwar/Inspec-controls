@@ -22,6 +22,12 @@ jobs:
         with:
           directory: './coupa-db'
           filename: 'coupa-db_release.zip'
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: coupa-db_release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
