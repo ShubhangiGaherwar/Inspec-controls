@@ -11,7 +11,8 @@ jobs:
 
           ls -alh
           zip -r coupa_app_release.zip coupa-app
-          echo "Coupa-app dir zipped"
+          zip -r coupa_db_release.zip coupa-db
+          echo "Coupa-app and db dir zipped"
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
@@ -52,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_id: ${{ steps.create_release.outputs.id }}
-          assets_path: coupa_app_release.zip 
+          assets_path: coupa_app_release.zip , coupa_db_release.zip
 
 
 
