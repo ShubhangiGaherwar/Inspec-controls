@@ -9,10 +9,72 @@ jobs:
         run: |
           echo "Hello World!!"
 
-          ls -alh
+          control_dirs= ls | grep coupa
+          echo $control_dirs
           zip -r coupa_app_release.zip coupa-app
           zip -r coupa_db_release.zip coupa-db
           echo "Coupa-app and db dir zipped"
+
+      #
+      #
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     body: |
+      #       Changes in this Release
+      #       - First Change
+      #       - Second Change
+      #     draft: false
+      #     prerelease: false
+      # - name : Printing create release output
+      #   run:
+      #        echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
+      #        echo "${{steps.create_release.outputs.html_url}}"
+      # - name: Upload Release Assets
+      #   id: upload-release-assets
+      #   uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  coupa_app_release.zip
+      #
+      # - uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  coupa_db_release.zip
+      #
+      #
+      #
+      #
+      #
+
+
+
+
+
+
+      # - name: Upload to release
+      #   uses: JasonEtco/upload-to-release@master
+      #   with:
+      #     args: coupa_app_release.zip
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+
+
+
+
+
       # - name: Archive Release
       #   uses: thedoctor0/zip-release@master
       #   with:
@@ -26,53 +88,6 @@ jobs:
       # - name : Printing
       #   run:
       #      ls -alh
-
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - name : Printing create release output
-        run:
-             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
-             echo "${{steps.create_release.outputs.html_url}}"
-      - name: Upload Release Assets
-        id: upload-release-assets
-        uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa_app_release.zip
-
-      - uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa_db_release.zip
-
-
-
-
-      # - name: Upload to release
-      #   uses: JasonEtco/upload-to-release@master
-      #   with:
-      #     args: coupa_app_release.zip
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
 #
 #
 #
