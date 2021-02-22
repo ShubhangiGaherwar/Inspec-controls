@@ -2,7 +2,7 @@ name : Trial action
 on:
   push:
     branches:
-      master
+      - master
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -10,5 +10,4 @@ jobs:
       - name: Printing
         run: |
           echo "Hello World!!"
-          
         
