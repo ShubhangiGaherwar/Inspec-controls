@@ -22,10 +22,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           skip-tag:  'true'
-       - name:  'Output Step'
-         env:
-           NEW_TAG: ${{ steps.version_bump.outputs.newTag }}
-         run: echo "new tag $NEW_TAG"
+       # - name:  'Output Step'
+       #   env:
+       #     NEW_TAG: ${{ steps.version_bump.outputs.newTag }}
+       #   run: echo "new tag $NEW_TAG"
 
       - name: Create Release
         id: create_release
