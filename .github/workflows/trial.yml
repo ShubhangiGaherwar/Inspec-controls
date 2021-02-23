@@ -46,7 +46,7 @@ jobs:
               assets+=("-a" "$asset")
             done
             tag_name="v${{steps.update_git_tag_version.outputs.version}}"
-            hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+            hub release create "coupa-app_release.zip" -m "$tag_name" "$tag_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Create Release
