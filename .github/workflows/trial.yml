@@ -68,7 +68,7 @@ jobs:
         run: |
            curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
            inspec -v --chef-license accept-silent
-           # inspec archive ./coupa-utl
+           inspec archive ./coupa-utl
            ls
       # - name: Inspec Tools Action
       #   uses: mitre/inspec_tools_action@v1.0
