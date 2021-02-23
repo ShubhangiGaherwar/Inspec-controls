@@ -26,7 +26,7 @@ control '6.2' do
   describe 'The mysql log files partition installed on' do
     subject { global_log_bin_basename }
     it { should_not eq '/' }
-    it { should_not include ('/var', '/usr') }
+    it { should_not include('/var','/usr') }
   end
   only_if { os.linux? }
 end
