@@ -57,6 +57,7 @@ jobs:
              echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
              echo "${{steps.create_release.outputs.html_url}}"
              echo "${{steps.create_release.outputs.id}}"
+             ls
 
       # - name: Upload Release Asset
       #   id: upload-release-asset
