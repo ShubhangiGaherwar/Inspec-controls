@@ -19,7 +19,7 @@ jobs:
             echo $zip_file_name
           done
           echo "done"
-          for each_zip_dir in $(ls | grep zip)
+          for each_zip_dir in $(ls )
           do
 
 
