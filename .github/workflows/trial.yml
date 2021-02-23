@@ -30,8 +30,8 @@ jobs:
       - name: version update for tag
         id: update_git_tag_version
         run: |
-             gem install rake
-             gem install semantic
+             sudo gem install rake
+             sudo gem install semantic
              rake config:version_update
              version= 'cat version'
              echo ::set-output name=version::"$(cat version)"
