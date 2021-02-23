@@ -35,8 +35,8 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-          pwd
-          ls -alh
+          # pwd
+          # ls -alh
      - name: "Automated Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
