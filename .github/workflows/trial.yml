@@ -15,12 +15,14 @@ jobs:
           for each_dir in $(ls | grep coupa)
           do
             zip_file_name="${each_dir}_release.zip"
-
+            zip -r $zip_file_name $each_dir
             echo $zip_file_name
           done
           echo "done"
+
           ls
-          for each_zip_dir in $(ls )
+          echo "grepped zip files are :"
+          for each_zip_dir in $(ls | grep .zip)
           do
             echo $each_zip_dir
           done
