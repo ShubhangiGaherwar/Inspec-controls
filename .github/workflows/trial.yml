@@ -70,7 +70,7 @@ jobs:
            export CHEF_LICENSE="accept"
            inspec -v
 
-           inspec archive ./coupa-utl
+           # inspec archive ./coupa-utl
            inspec archive ./coupa-app
 
            # for each_role_dir in $(ls | grep coupa)
