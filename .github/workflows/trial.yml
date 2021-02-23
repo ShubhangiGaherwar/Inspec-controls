@@ -16,7 +16,7 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-          ls 
+          ls
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
