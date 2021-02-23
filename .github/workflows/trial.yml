@@ -25,6 +25,7 @@ jobs:
 
             echo $each_zip_dir
           done
+         ls
 
 
 
