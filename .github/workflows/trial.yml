@@ -35,7 +35,9 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-
+ release_test:
+   runs-on: ubuntu-latest
+   steps:
      - name: "Automated Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
