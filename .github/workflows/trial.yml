@@ -16,9 +16,7 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
+      
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.26.0
         env:
