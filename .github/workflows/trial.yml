@@ -12,11 +12,11 @@ jobs:
           control_dirs= ls | grep coupa
           echo $control_dirs
 
-          for each_dir in $control_dirs;
+          for each_dir in $(ls | grep coupa)
           do
-            # zip_file_name="${each_dir}_release.zip"
+            zip_file_name="${each_dir}_release.zip"
 
-            echo "hi";
+            echo $zip_file_name
           done
           echo "done"
 
