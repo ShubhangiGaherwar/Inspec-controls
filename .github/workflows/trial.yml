@@ -66,14 +66,14 @@ jobs:
       #     asset_name: coupa-app_release.zip
       #     asset_content_type: application/zip
 
-      # - name: Upload Release Assets
-      #   id: upload-release-assets
-      #   uses: dwenegar/upload-release-assets@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     release_id: ${{ steps.create_release.outputs.id }}
-      #     assets_path:  ./*.zip
+      - name: Upload Release Assets
+        id: upload-release-assets
+        uses: dwenegar/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+          assets_path:  ./*.zip
       # - name: Upload assets to a Release
       #   uses: AButler/upload-release-assets@v2.0
       #   with:
