@@ -66,7 +66,7 @@ jobs:
       #     command: inspec archive ./coupa-utl
       - name: Insatalling inspec and Printing result of inspec Archive
         run: |
-           curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec | --chef-license=accept
+           curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec 
            # inspec -v
            # inspec archive ./coupa-utl
            ls
