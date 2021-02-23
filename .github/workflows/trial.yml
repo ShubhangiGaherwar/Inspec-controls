@@ -4,7 +4,9 @@ jobs:
   zip_creation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
       - name: Printing
         run: |
           echo "Hello World!!"
@@ -17,35 +19,29 @@ jobs:
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
           ls
-      # - uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: '0'
-      # - name: Bump version and push tag
-      #   id: bump_version_and_push_tag
-      #   uses: anothrNick/github-tag-action@1.26.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     WITH_V: true
-      #     RELEASE_BRANCHES: main
-      - name: version update for tag
-        id: update_git_tag_version
-        run: |
-             sudo gem install rake
-             sudo gem install semantic
-             rake config:version_update
-             echo ::set-output name=version::"$(cat version)"
-             # git add version
-             # git commit -m "version upadate "
-             # git push origin main
 
+      - name: Bump version and push tag
+        id: bump_version_and_push_tag
+        uses: anothrNick/github-tag-action@1.26.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          RELEASE_BRANCHES: main
+      # - name: version update for tag
+      #   id: update_git_tag_version
+      #   run: |
+      #        sudo gem install rake
+      #        sudo gem install semantic
+      #        rake config:version_update
+      #        echo ::set-output name=version::"$(cat version)"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v${{steps.update_git_tag_version.outputs.version}}   #steps.bump_version_and_push_tag.outputs.new_tag github.ref
-          release_name: Release v${{steps.update_git_tag_version.outputs.version}}
+          tag_name: v${{teps.bump_version_and_push_tag.outputs.new_tag}}   #steps.bump_version_and_push_tag.outputs.new_tag github.ref
+          release_name: Release v${{teps.bump_version_and_push_tag.outputs.new_tag}}
           body: |
             Changes in this Release
             - First Change
@@ -59,16 +55,7 @@ jobs:
              echo "${{steps.create_release.outputs.id}}"
 
 
-      # - name: Upload Release Asset
-      #   id: upload-release-asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-      #     asset_path: ./coupa-app_release.zip
-      #     asset_name: coupa-app_release.zip
-      #     asset_content_type: application/zip
+
 
       - name: Upload Release Assets
         id: upload-release-assets
@@ -78,16 +65,3 @@ jobs:
         with:
           release_id: ${{ steps.create_release.outputs.id }}
           assets_path:  ./*_release.zip
-      # - name: Upload assets to a Release
-      #   uses: AButler/upload-release-assets@v2.0
-      #   with:
-      #     files: ./*.zip
-      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-
-      # - uses: dwenegar/upload-release-assets@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     release_id: ${{ steps.create_release.outputs.id }}
-      #     assets_path:  coupa-db_release.zip
