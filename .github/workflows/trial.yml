@@ -33,7 +33,6 @@ jobs:
              sudo gem install rake
              sudo gem install semantic
              rake config:version_update
-             version= 'cat version'
              echo ::set-output name=version::"$(cat version)"
 
       - name: Create Release
