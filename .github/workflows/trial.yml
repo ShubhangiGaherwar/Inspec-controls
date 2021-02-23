@@ -19,13 +19,12 @@ jobs:
             echo $zip_file_name
           done
           echo "done"
+          ls
           for each_zip_dir in $(ls )
           do
-
-
             echo $each_zip_dir
           done
-         ls
+
 
 
 
