@@ -45,6 +45,7 @@ jobs:
         run:
              echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
              echo "${{steps.create_release.outputs.html_url}}"
+             echo "${{steps.create_release.outputs.id}}"
       - name: Upload Release Assets
         id: upload-release-assets
         uses: dwenegar/upload-release-assets@v1
