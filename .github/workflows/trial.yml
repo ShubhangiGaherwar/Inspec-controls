@@ -80,8 +80,8 @@ jobs:
 
               echo "inside loop"
            done
-           pwd 
-           ls
+           pwd
+           ls -alh
       #inspec archive ./coupa-utl --chef-license accept-silent
       # - name: Inspec Tools Action
       #   uses: mitre/inspec_tools_action@v1.0
