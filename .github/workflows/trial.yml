@@ -19,6 +19,14 @@ jobs:
             echo $zip_file_name
           done
           echo "done"
+          for each_zip_dir in $(ls | grep *.zip)
+          do
+
+
+            echo $each_zip_dir
+          done
+
+
 
       # zip -r $zip_file_name $each_dir
       ## zip -r coupa_app_release.zip coupa-app
