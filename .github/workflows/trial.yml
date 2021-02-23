@@ -70,14 +70,14 @@ jobs:
            export CHEF_LICENSE="accept"
            inspec -v
 
-           # inspec archive ./coupa-utl
-           # inspec archive ./coupa-app
+           inspec archive ./coupa-utl
+           inspec archive ./coupa-app
 
-           for each_role_dir in $(ls | grep coupa)
-           do
-              inspec archive ./$each_role_dir
-              echo "inside loop"
-           done
+           # for each_role_dir in $(ls | grep coupa)
+           # do
+           #    inspec archive ./$each_role_dir
+           #    echo "inside loop"
+           # done
 
            ls
       #inspec archive ./coupa-utl --chef-license accept-silent
