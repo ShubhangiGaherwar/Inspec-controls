@@ -4,79 +4,8 @@ jobs:
   zip_creation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Printing
-        run: |
-          echo "Hello World!!"
-          curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
-          export CHEF_LICENSE="accept"
-          inspec -v
-          for each_role_dir in $(ls | grep coupa)
-          do
-             echo "${each_role_dir}"
-             inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
-          done
-          ls
-      # - uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: '0'
-      # - name: Bump version and push tag
-      #   id: bump_version_and_push_tag
-      #   uses: anothrNick/github-tag-action@1.26.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     WITH_V: true
-      #     RELEASE_BRANCHES: main
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: v${{ github.run_number }}   #steps.bump_version_and_push_tag.outputs.new_tag github.ref
-          release_name: Release v${{ github.run_number }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - name : Printing create release output
-        run:
-             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
-             echo "${{steps.create_release.outputs.html_url}}"
-             echo "${{steps.create_release.outputs.id}}"
-
-      # - name: Upload Release Asset
-      #   id: upload-release-asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-      #     asset_path: './coupa-app_release.zip'
-      #     asset_name: 'coupa-app_release.zip'
-      #     asset_content_type: application/zip
-
-      - name: Upload Release Assets
-        id: upload-release-assets
-        uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  ./*.zip
-      # - name: Upload assets to a Release
-      #   uses: AButler/upload-release-assets@v2.0
-      #   with:
-      #     files: ./*.zip
-      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-    #
-      # - uses: dwenegar/upload-release-assets@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     release_id: ${{ steps.create_release.outputs.id }}
-      #     assets_path:  coupa_db_release.zip
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      - name: Use tag
+        run: echo ${{steps.tag.outputs.tag}}
