@@ -39,13 +39,14 @@ jobs:
              # git push origin main
       - name: create release
         run: |
-        set -x
-        assets=()
-        for asset in ./*.zip; do
-          assets+=("-a" "$asset")
-        done
-        tag_name="${GITHUB_REF##*/}"
-        hub release create "${assets[@]}" -m "v${{steps.update_git_tag_version.outputs.version}}" "v${{steps.update_git_tag_version.outputs.version}}"
+            set -x
+            assets=()
+            for asset in $(ls | grep .zip)
+            do
+              assets+=("-a" "$asset")
+            done
+            tag_name="v${{steps.update_git_tag_version.outputs.version}}"
+            hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Create Release
@@ -95,9 +96,9 @@ jobs:
       #     repo-token: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa-db_release.zip
+      # - uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  coupa-db_release.zip
