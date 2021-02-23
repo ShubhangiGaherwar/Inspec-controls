@@ -1,7 +1,7 @@
-name : Trial action
+name : release creation action
 on: push
 jobs:
-  zip_creation:
+  zip_creation_and_create_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           RELEASE_BRANCHES: main
-      
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
