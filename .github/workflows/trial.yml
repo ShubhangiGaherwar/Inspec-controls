@@ -27,13 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           RELEASE_BRANCHES: main
-      # - name: version update for tag
-      #   id: update_git_tag_version
-      #   run: |
-      #        sudo gem install rake
-      #        sudo gem install semantic
-      #        rake config:version_update
-      #        echo ::set-output name=version::"$(cat version)"
+      
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
