@@ -79,7 +79,7 @@ jobs:
               # then
               # inspec archive ./$each_role_dir
               # fi
-              print "inside loop"
+              echo "inside loop"
            done
 
            ls
