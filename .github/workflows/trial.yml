@@ -69,18 +69,19 @@ jobs:
            curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
            export CHEF_LICENSE="accept"
            inspec -v
-           pwd
+
            # inspec archive ./coupa-utl
            # inspec archive ./coupa-app
 
            for each_role_dir in $(ls | grep coupa)
            do
-              if $each_role_dir != "coupa-db"
-              then
-              inspec archive ./$each_role_dir
-              fi
+              # if $each_role_dir != "coupa-db"
+              # then
+              # inspec archive ./$each_role_dir
+              # fi
+              print "inside loop"
            done
-           pwd
+
            ls
       #inspec archive ./coupa-utl --chef-license accept-silent
       # - name: Inspec Tools Action
