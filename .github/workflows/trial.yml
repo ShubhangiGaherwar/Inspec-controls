@@ -16,13 +16,12 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-      - name: "Automated Version Bump"
-         id: version_bump
-         uses: "phips28/gh-action-bump-version@master"
-         with:
-           tag-prefix: ''
-         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          skip-tag:  'true'
        - name:  'Output Step'
          env:
            NEW_TAG: ${{ steps.version_bump.outputs.newTag }}
