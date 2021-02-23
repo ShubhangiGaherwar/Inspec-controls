@@ -16,3 +16,36 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+      - name : Printing create release output
+        run:
+             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
+             echo "${{steps.create_release.outputs.html_url}}"
+      - name: Upload Release Assets
+        id: upload-release-assets
+        uses: dwenegar/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+          assets_path:  coupa_app_release.zip
+
+      - uses: dwenegar/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+          assets_path:  coupa_db_release.zip
