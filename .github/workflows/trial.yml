@@ -53,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  *.zip
+          assets_path:  ./*.zip
 
 
       # zip -r $zip_file_name $each_dir
