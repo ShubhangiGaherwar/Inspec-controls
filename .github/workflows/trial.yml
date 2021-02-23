@@ -1,7 +1,7 @@
 name : Trial action
 on: push
 jobs:
-  test:
+  zip_creation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -16,6 +16,18 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
+      - name: "Automated Version Bump"
+         id: version-bump
+         uses: "phips28/gh-action-bump-version@master"
+         with:
+           tag-prefix: ''
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       - name:  'Output Step'
+         env:
+           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+         run: echo "new tag $NEW_TAG"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
