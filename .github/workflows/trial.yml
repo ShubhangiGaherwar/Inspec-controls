@@ -18,6 +18,7 @@ jobs:
 
             echo $zip_file_name
           done
+          echo "done"
 
       # zip -r $zip_file_name $each_dir
       ## zip -r coupa_app_release.zip coupa-app
