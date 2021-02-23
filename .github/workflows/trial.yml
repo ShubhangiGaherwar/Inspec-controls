@@ -75,10 +75,10 @@ jobs:
 
            for each_role_dir in $(ls | grep coupa)
            do
-              # if $each_role_dir != "coupa-db"
-              # then
-              # inspec archive ./$each_role_dir
-              # fi
+              if $each_role_dir != "coupa-db"
+              then
+                inspec archive ./$each_role_dir
+              fi
               echo "inside loop"
            done
 
