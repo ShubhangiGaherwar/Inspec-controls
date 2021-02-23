@@ -14,9 +14,9 @@ jobs:
 
           for each_dir in $control_dirs
           do
-            zip_file_name="${each_dir}_release.zip"
+            # zip_file_name="${each_dir}_release.zip"
 
-            echo $zip_file_name
+            echo "hi"
           done
           echo "done"
 
