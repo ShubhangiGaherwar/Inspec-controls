@@ -66,7 +66,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa-utl_release.zip
+          assets_path:  ./*.zip
       # - name: Upload assets to a Release
       #   uses: AButler/upload-release-assets@v2.0
       #   with:
