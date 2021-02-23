@@ -57,7 +57,7 @@ jobs:
              echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
              echo "${{steps.create_release.outputs.html_url}}"
              echo "${{steps.create_release.outputs.id}}"
-             ls
+
 
       # - name: Upload Release Asset
       #   id: upload-release-asset
@@ -77,7 +77,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  ./*.zip
+          assets_path:  ./*_release.zip
       # - name: Upload assets to a Release
       #   uses: AButler/upload-release-assets@v2.0
       #   with:
