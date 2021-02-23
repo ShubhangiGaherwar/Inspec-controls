@@ -1,0 +1,21 @@
+require 'semantic'
+
+namespace :config do
+
+  desc 'coupa-Inspec version update'
+  task :version_update do
+    # puts "hi"
+    version = Semantic::Version.new File.read('version')
+    # puts version
+    version = if version.minor.eql?(99) && version.patch.eql?(99)
+                version.major!
+              elsif version.patch.eql?(99)
+                version.minor!
+              else
+                version.patch!
+              end
+    file=File.open('version',"w+")
+    file.puts "#{version}"
+    puts "#{version}"
+  end
+end
