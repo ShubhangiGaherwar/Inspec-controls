@@ -58,11 +58,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Run Inspec
-        run: inspec archive ./coupa-utl
+      # - name: Run Inspec
+      #   run: inspec archive ./coupa-utl
+      - name: Inspec Tools Action
+        uses: mitre/inspec_tools_action@v1.0
+        with:
+          command: inspec archive ./coupa-utl
       - name: Printing result of inspec Archive
         run: |
-           ls 
+           ls
+      - name: Inspec Tools Action
+        uses: mitre/inspec_tools_action@v1.0
+
 
       # zip -r $zip_file_name $each_dir
       ## zip -r coupa_app_release.zip coupa-app
