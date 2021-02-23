@@ -8,25 +8,6 @@ jobs:
       - name: Printing
         run: |
           echo "Hello World!!"
-
-          # control_dirs= ls | grep coupa
-          # echo $control_dirs
-          #
-          # for each_dir in $(ls | grep coupa)
-          # do
-          #   zip_file_name="${each_dir}_release.zip"
-          #   zip -r $zip_file_name $each_dir
-          #   echo $zip_file_name
-          # done
-          # echo "done"
-          #
-          # ls
-          # echo "grepped zip files are :"
-          # for each_zip_dir in $(ls | grep .zip)
-          # do
-          #   echo $each_zip_dir
-          # done
-
           curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
           export CHEF_LICENSE="accept"
           inspec -v
@@ -35,4 +16,3 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
- 
