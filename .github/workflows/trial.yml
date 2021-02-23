@@ -9,52 +9,60 @@ jobs:
         run: |
           echo "Hello World!!"
 
-          control_dirs= ls | grep coupa
-          echo $control_dirs
+          # control_dirs= ls | grep coupa
+          # echo $control_dirs
+          #
+          # for each_dir in $(ls | grep coupa)
+          # do
+          #   zip_file_name="${each_dir}_release.zip"
+          #   zip -r $zip_file_name $each_dir
+          #   echo $zip_file_name
+          # done
+          # echo "done"
+          #
+          # ls
+          # echo "grepped zip files are :"
+          # for each_zip_dir in $(ls | grep .zip)
+          # do
+          #   echo $each_zip_dir
+          # done
 
-          for each_dir in $(ls | grep coupa)
-          do
-            zip_file_name="${each_dir}_release.zip"
-            zip -r $zip_file_name $each_dir
-            echo $zip_file_name
-          done
-          echo "done"
 
-          ls
-          echo "grepped zip files are :"
-          for each_zip_dir in $(ls | grep .zip)
-          do
-            echo $each_zip_dir
-          done
-
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - name : Printing create release output
-        run:
-             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
-             echo "${{steps.create_release.outputs.html_url}}"
-      - name: Upload Release Assets
-        id: upload-release-assets
-        uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  ./*.zip
-
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     body: |
+      #       Changes in this Release
+      #       - First Change
+      #       - Second Change
+      #     draft: false
+      #     prerelease: false
+      # - name : Printing create release output
+      #   run:
+      #        echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
+      #        echo "${{steps.create_release.outputs.html_url}}"
+      # - name: Upload Release Assets
+      #   id: upload-release-assets
+      #   uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  ./*.zip
+  inspec_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Inspec
+        run: inspec archive ./coupa-utl
+      - name: Printing result of inspec Archive
+        run: |
+           ls 
 
       # zip -r $zip_file_name $each_dir
       ## zip -r coupa_app_release.zip coupa-app
