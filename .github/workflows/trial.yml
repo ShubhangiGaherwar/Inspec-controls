@@ -16,47 +16,57 @@ jobs:
              echo "${each_role_dir}"
              inspec archive ./$each_role_dir  --zip --output=./"${each_role_dir}"_release.zip
           done
-      - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 12
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          skip-tag:  'true'
-       # - name:  'Output Step'
-       #   env:
-       #     NEW_TAG: ${{ steps.version_bump.outputs.newTag }}
-       #   run: echo "new tag $NEW_TAG"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name:  'Output Step'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - name : Printing create release output
-        run:
-             echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
-             echo "${{steps.create_release.outputs.html_url}}"
-      - name: Upload Release Assets
-        id: upload-release-assets
-        uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa_app_release.zip
-
-      - uses: dwenegar/upload-release-assets@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
-          assets_path:  coupa_db_release.zip
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG"
+      #
+      #
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     body: |
+      #       Changes in this Release
+      #       - First Change
+      #       - Second Change
+      #     draft: false
+      #     prerelease: false
+      # - name : Printing create release output
+      #   run:
+      #        echo " Create release outputs = ${{steps.create_release.outputs.upload_url}}"
+      #        echo "${{steps.create_release.outputs.html_url}}"
+      # - name: Upload Release Assets
+      #   id: upload-release-assets
+      #   uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  coupa_app_release.zip
+      #
+      # - uses: dwenegar/upload-release-assets@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     release_id: ${{ steps.create_release.outputs.id }}
+      #     assets_path:  coupa_db_release.zip
