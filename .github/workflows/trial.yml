@@ -78,16 +78,16 @@ jobs:
       #   with:
       #     release_id: ${{ steps.create_release.outputs.id }}
       #     assets_path:  ./*_release.zip
-      - name: Upload assets to a Release
-        uses: AButler/upload-release-assets@v2.0
-        with:
-          files: ./*.zip
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-    #
-      # - uses: dwenegar/upload-release-assets@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload assets to a Release
+      #   uses: AButler/upload-release-assets@v2.0
       #   with:
-      #     release_id: ${{ steps.create_release.outputs.id }}
-      #     assets_path:  coupa_db_release.zip
+      #     files: ./*.zip
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - uses: dwenegar/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+          assets_path:  coupa-db_release.zip
