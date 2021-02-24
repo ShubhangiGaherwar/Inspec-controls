@@ -1,5 +1,8 @@
 name : release creation action
-on: push
+on:
+  push:
+    branches:
+      - main      
 jobs:
   zip_creation_and_create_release:
     runs-on: ubuntu-latest
@@ -38,9 +41,7 @@ jobs:
           tag_name: ${{ steps.bump_version_and_push_tag.outputs.new_tag }}   #steps.bump_version_and_push_tag.outputs.new_tag github.ref
           release_name: Release ${{ steps.bump_version_and_push_tag.outputs.new_tag }}
           body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+            Release ${{ steps.bump_version_and_push_tag.outputs.new_tag }}
           draft: false
           prerelease: false
 
